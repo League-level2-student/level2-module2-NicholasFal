@@ -1,5 +1,6 @@
 package _06_overloading;
 
+import java.awt.Color;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -19,9 +20,18 @@ public class LeagueOptionPane {
 	public static void showMessageDialog(String message) {
 		// 1. Open example.png and make a GUI that looks like that
 		//    The message parameter is what we want to show on our pop-up
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("Message");
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel(message);
+		JLabel picture = new JLabel();
+		picture.setIcon(loadImage("league.png"));
 		// 2. Uncomment the line of code below. It sets the location of our frame to the center of the screen
 		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.add(panel);
+		panel.add(picture);
+		panel.add(label);
+		frame.pack();
 	}
 	
 	// 3. Call this method in the Runner class
@@ -55,9 +65,46 @@ public class LeagueOptionPane {
 		//
 		// WHY DID WE DO THIS? - because we were able to overload this method by calling one of the other methods inside of it
 	public static void showMessageDialog(String Message, String Title) {
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame(Title);
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel(Message);
+		JLabel picture = new JLabel();
+		picture.setIcon(loadImage("league.png"));
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.add(panel);
+		panel.add(picture);
+		panel.add(label);
+		frame.pack();
 	}
-	
+	public static void showMessageDialog(String Message, String Title, String FileName) {
+		JFrame frame = new JFrame(Title);
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel(Message);
+		JLabel picture = new JLabel();
+		picture.setIcon(loadImage(FileName));
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.add(panel);
+		panel.add(picture);
+		panel.add(label);
+		frame.pack();
+	}
+	public static JPanel showMessageDialog(String Message, String Title, String FileName, Color BackroundColor) {
+		JFrame frame = new JFrame(Title);
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel(Message);
+		JLabel picture = new JLabel();
+		panel.setBackground(BackroundColor);
+		picture.setIcon(loadImage(FileName));
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.add(panel);
+		panel.add(picture);
+		panel.add(label);
+		frame.pack();
+		return panel;
+	}
 	public static ImageIcon loadImage(String fileName) {
 		try {
 			return new ImageIcon(ImageIO.read(new LeagueOptionPane().getClass().getResourceAsStream(fileName)));
